@@ -1,0 +1,1256 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="一个基于 ASGI 协议的异步 Web 框架.">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-4.6.3">
+    
+    
+      
+        <title>Available value - Index.py</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.adb8469c.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.86422ebf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#env" tabindex="0" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Index.py" aria-label="Index.py" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Index.py
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Available value
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/abersheeran/index.py/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    abersheeran/index.py
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../.." class="md-tabs__link">
+          Index.py
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../firststep/" class="md-tabs__link">
+          Get Start
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../" class="md-tabs__link md-tabs__link--active">
+          Configuration
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../http/http/" class="md-tabs__link">
+          HTTP
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../websocket/" class="md-tabs__link">
+          WebSocket
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../event/" class="md-tabs__link">
+          Lifespan
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../mount/" class="md-tabs__link">
+          Mount
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../test/" class="md-tabs__link">
+          Test
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../command/" class="md-tabs__link">
+          Command
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Index.py" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Index.py
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/abersheeran/index.py/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    abersheeran/index.py
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Index.py
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Index.py
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="介绍" class="md-nav__link">
+      介绍
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Get Start
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Get Start
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../firststep/" title="First Step" class="md-nav__link">
+      First Step
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../firststep/mustknow/" title="Must know" class="md-nav__link">
+      Must know
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Configuration
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Configuration" class="md-nav__link">
+      Configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Available value
+      </label>
+    
+    <a href="./" title="Available value" class="md-nav__link md-nav__link--active">
+      Available value
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#env" class="md-nav__link">
+    ENV
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug" class="md-nav__link">
+    DEBUG
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log_level" class="md-nav__link">
+    LOG_LEVEL
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#host" class="md-nav__link">
+    HOST
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#port" class="md-nav__link">
+    PORT
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#allowed_hosts" class="md-nav__link">
+    ALLOWED_HOSTS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#force_ssl" class="md-nav__link">
+    FORCE_SSL
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autoreload" class="md-nav__link">
+    AUTORELOAD
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hotreload" class="md-nav__link">
+    HOTRELOAD
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#allow_underline" class="md-nav__link">
+    ALLOW_UNDERLINE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors_allow_origins" class="md-nav__link">
+    CORS_ALLOW_ORIGINS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors_allow_origin_regex" class="md-nav__link">
+    CORS_ALLOW_ORIGIN_REGEX
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors_allow_methods" class="md-nav__link">
+    CORS_ALLOW_METHODS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors_allow_headers" class="md-nav__link">
+    CORS_ALLOW_HEADERS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors_allow_credentials" class="md-nav__link">
+    CORS_ALLOW_CREDENTIALS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors_expose_headers" class="md-nav__link">
+    CORS_EXPOSE_HEADERS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors_max_age" class="md-nav__link">
+    CORS_MAX_AGE
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      HTTP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        HTTP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../http/http/" title="HTTP" class="md-nav__link">
+      HTTP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../http/response/" title="Response" class="md-nav__link">
+      Response
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../http/middleware/" title="Middleware" class="md-nav__link">
+      Middleware
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../http/openapi/" title="OpenAPI" class="md-nav__link">
+      OpenAPI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../http/exception/" title="Exception" class="md-nav__link">
+      Exception
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../http/background/" title="Background" class="md-nav__link">
+      Background
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      WebSocket
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        WebSocket
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../websocket/" title="Websocket" class="md-nav__link">
+      Websocket
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Lifespan
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Lifespan
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../event/" title="Event" class="md-nav__link">
+      Event
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Mount
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Mount
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../mount/" title="Mount" class="md-nav__link">
+      Mount
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Test
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Test
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../test/" title="Test" class="md-nav__link">
+      Test
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Command
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Command
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../command/" title="Command" class="md-nav__link">
+      Command
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#env" class="md-nav__link">
+    ENV
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug" class="md-nav__link">
+    DEBUG
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log_level" class="md-nav__link">
+    LOG_LEVEL
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#host" class="md-nav__link">
+    HOST
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#port" class="md-nav__link">
+    PORT
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#allowed_hosts" class="md-nav__link">
+    ALLOWED_HOSTS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#force_ssl" class="md-nav__link">
+    FORCE_SSL
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autoreload" class="md-nav__link">
+    AUTORELOAD
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hotreload" class="md-nav__link">
+    HOTRELOAD
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#allow_underline" class="md-nav__link">
+    ALLOW_UNDERLINE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors_allow_origins" class="md-nav__link">
+    CORS_ALLOW_ORIGINS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors_allow_origin_regex" class="md-nav__link">
+    CORS_ALLOW_ORIGIN_REGEX
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors_allow_methods" class="md-nav__link">
+    CORS_ALLOW_METHODS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors_allow_headers" class="md-nav__link">
+    CORS_ALLOW_HEADERS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors_allow_credentials" class="md-nav__link">
+    CORS_ALLOW_CREDENTIALS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors_expose_headers" class="md-nav__link">
+    CORS_EXPOSE_HEADERS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors_max_age" class="md-nav__link">
+    CORS_MAX_AGE
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/abersheeran/index.py/tree/master/docs/config/list.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Available value</h1>
+                
+                <h3 id="env">ENV</h3>
+<p><strong>默认值:</strong> <code>"dev"</code></p>
+<p><code>env</code> 是一个十分重要的配置，它允许自动使用对应环境下的配置。</p>
+<h3 id="debug">DEBUG</h3>
+<p><strong>默认值:</strong> <code>False</code></p>
+<p>我不认为这个配置需要解释什么。</p>
+<p>在环境变量里 <code>INDEX_DEBUG</code> 为 <code>"on"</code> 或者 <code>"True"</code> 时，<code>DEBUG</code> 为真。</p>
+<h3 id="log_level">LOG_LEVEL</h3>
+<p><strong>默认值:</strong> <code>"info"</code></p>
+<p><code>log_level</code> 有五个可用值, 下面是它与 <code>logging</code> 的等级对应表</p>
+<table>
+<thead>
+<tr>
+<th>log_level</th>
+<th>logging</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"critical"</td>
+<td>logging.CRITICAL</td>
+</tr>
+<tr>
+<td>"error"</td>
+<td>logging.ERROR</td>
+</tr>
+<tr>
+<td>"warning"</td>
+<td>logging.WARNING</td>
+</tr>
+<tr>
+<td>"info"</td>
+<td>logging.INFO</td>
+</tr>
+<tr>
+<td>"debug"</td>
+<td>logging.DEBUG</td>
+</tr>
+</tbody>
+</table>
+<h3 id="host">HOST</h3>
+<p><strong>默认值:</strong> <code>"127.0.0.1"</code></p>
+<p><code>host</code> 指定 Index 监听的地址。</p>
+<h3 id="port">PORT</h3>
+<p><strong>默认值:</strong> <code>4190</code></p>
+<p><code>port</code> 指定 Index 监听的端口。</p>
+<h3 id="allowed_hosts">ALLOWED_HOSTS</h3>
+<p><strong>默认值:</strong> <code>["*"]</code></p>
+<p><code>allowed_hosts</code> 用于指定 Index 允许被访问的 HOST。</p>
+<p>一些例子:</p>
+<ol>
+<li>
+<p><code>["*"]</code></p>
+<p>允许所有的 HOST 访问</p>
+</li>
+<li>
+<p><code>["example.com", "*example.com"]</code></p>
+<p>允许 example.com 以及 example.com 的子域名访问。</p>
+</li>
+<li>
+<p><code>["example.com", "test.com"]</code></p>
+<p>允许 example.com 与 test.com 的访问。</p>
+</li>
+</ol>
+<h3 id="force_ssl">FORCE_SSL</h3>
+<p><strong>默认值:</strong> <code>False</code></p>
+<p><code>force_ssl</code> 允许 HTTP/WS 强制跳转到 HTTPS/WSS。</p>
+<h3 id="autoreload">AUTORELOAD</h3>
+<p><strong>默认值:</strong> <code>False</code></p>
+<p><code>autoreload</code> 为真时，使用 <code>index-cli serve</code> 或 <code>index-cli gunicorn start</code> 时，将会监听当前的项目修改，自动重启服务。</p>
+<h3 id="hotreload">HOTRELOAD</h3>
+<p><strong>默认值:</strong> <code>True</code></p>
+<p><code>hotreload</code> 为真时，将允许 Index 提供真正的热重载功能。</p>
+<div class="admonition notice">
+<p class="admonition-title">Notice</p>
+<p>当 <code>AUTORELOAD</code> 为真时，此选项无效。</p>
+</div>
+<h3 id="allow_underline">ALLOW_UNDERLINE</h3>
+<p><strong>默认值:</strong> <code>False</code></p>
+<p>由于 Python 的 module 只允许字母、数字与下划线，但 URI 中出现出现下划线是被谷歌不推荐的，所以有了这个配置选项。</p>
+<p>当 <code>allow_underline</code> 为假时，如果 _ 存在于 URI 中，它将会被自动替换成 - 并且 301 跳转过去。</p>
+<h3 id="cors_allow_origins">CORS_ALLOW_ORIGINS</h3>
+<p><strong>默认值:</strong> <code>()</code></p>
+<p>在跨域请求中允许的 ORIGIN 列表。</p>
+<p>例如： <code>['https://example.org', 'https://www.example.org']</code></p>
+<p>你可以使用 <code>['*']</code> 来允许所有的 ORIGIN 值。</p>
+<h3 id="cors_allow_origin_regex">CORS_ALLOW_ORIGIN_REGEX</h3>
+<p><strong>默认值:</strong> <code>None</code></p>
+<p>需要是一个正则表达式字符串，它将用于匹配在跨域请求中允许的 ORIGIN 。</p>
+<p>例如：<code>'https://.*\.example\.org'</code></p>
+<h3 id="cors_allow_methods">CORS_ALLOW_METHODS</h3>
+<p><strong>默认值:</strong> <code>("GET",)</code></p>
+<p>在跨域请求中允许的 HTTP 请求方法列表。</p>
+<p>你可以使用 <code>['*']</code> 来允许所有的请求方法。</p>
+<h3 id="cors_allow_headers">CORS_ALLOW_HEADERS</h3>
+<p><strong>默认值:</strong> <code>()</code></p>
+<p>在跨域请求中允许被使用的 header 列表。</p>
+<p>你可以使用 <code>['*']</code> 来允许所有的 header。<code>Accept</code>、<code>Accept-Language</code>、<code>Content-Language</code> 和 <code>Content-Type</code> 在跨域请求中是默认允许的。</p>
+<h3 id="cors_allow_credentials">CORS_ALLOW_CREDENTIALS</h3>
+<p><strong>默认值:</strong> <code>False</code></p>
+<p>允许在跨域请求中携带 cookies。</p>
+<h3 id="cors_expose_headers">CORS_EXPOSE_HEADERS</h3>
+<p><strong>默认值:</strong> <code>()</code></p>
+<p>指定可供浏览器访问的任何响应头。</p>
+<h3 id="cors_max_age">CORS_MAX_AGE</h3>
+<p><strong>默认值:</strong> <code>600</code></p>
+<p>设置浏览器缓存 CORS 响应的最长时间（单位：秒）。</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../" title="Configuration" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                Configuration
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../http/http/" title="HTTP" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                HTTP
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.c33a9706.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.1",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>
