@@ -605,7 +605,7 @@
                 <h2 id="_1">编写中间件</h2>
 <p>在 <code>views</code> 中任意 <code>__init__.py</code> 中定义名为 <code>Middleware</code> 的类, 它将能处理所有通过该路径的 HTTP 请求。</p>
 <p>譬如在 <code>views/__init__.py</code> 中定义的中间件，能处理所有 URI 的 HTTP 请求；在 <code>views/api/__init__.py</code> 则只能处理 URI 为 <code>/api/*</code> 的请求。</p>
-<p><code>Middleware</code> 需要继承 <code>indexpy.middleware.MiddlewareMixin</code>，有以下两个方法可以重写。</p>
+<p><code>Middleware</code> 需要继承 <code>indexpy.http.MiddlewareMixin</code>，有以下两个方法可以重写。</p>
 <ol>
 <li>
 <p><code>process_request(request)</code></p>
@@ -626,16 +626,16 @@
 <p class="admonition-title">Notice</p>
 <p>子中间件的执行顺序是从左到右。</p>
 </div>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.middleware</span> <span class="kn">import</span> <span class="n">MiddlewareMixin</span>
-<span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">logger</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">MiddlewareMixin</span>
+
 
 
 <span class="k">class</span> <span class="nc">ExampleChildMiddleware</span><span class="p">(</span><span class="n">MiddlewareMixin</span><span class="p">):</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">process_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;enter first process request&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;enter first process request&quot;</span><span class="p">)</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">process_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;enter last process response&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;enter last process response&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">response</span>
 
 
@@ -643,10 +643,10 @@
     <span class="n">mounts</span> <span class="o">=</span> <span class="p">(</span><span class="n">ExampleChildMiddleware</span><span class="p">,)</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">process_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;example base middleware request&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;example base middleware request&quot;</span><span class="p">)</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">process_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;example base middleware response&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;example base middleware response&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">response</span>
 </code></pre></div>
                 

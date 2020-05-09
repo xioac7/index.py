@@ -735,24 +735,25 @@
 <h2 id="_1">解析请求</h2>
 <p>一般来说，从 HTTP 请求中传递参数的位置有五个——<code>path</code>、<code>query</code>、<code>header</code>、<code>cookie</code>、<code>body</code>。但 Index 的设计中，并没有给路径参数(<code>path</code>)留下位置，故只有后四种可被 Index 处理。<em>(可以像使用 PHP 一样用 Nginx 把 query 参数转为 path 参数，但没必要)</em></p>
 <p>如下例所示，只需要在视图函数中增加对应名称的参数即可使用更 Python 的方式去解析 HTTP 请求。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.view</span> <span class="kn">import</span> <span class="n">View</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
 <span class="kn">from</span> <span class="nn">indexpy.test</span> <span class="kn">import</span> <span class="n">TestView</span>
-<span class="kn">from</span> <span class="nn">indexpy.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
-<span class="kn">from</span> <span class="nn">indexpy.openapi</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">describe</span>
+<span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
+<span class="kn">from</span> <span class="nn">indexpy.openapi</span> <span class="kn">import</span> <span class="n">describe</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
 
 
-<span class="k">class</span> <span class="nc">Hello</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Hello</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="s2">&quot;Aber&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;your name&quot;</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">Message</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Message</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;your message&quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;your name&quot;</span><span class="p">)</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;what are you want to say?&quot;</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">HTTP</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">HTTP</span><span class="p">(</span><span class="n">HTTPView</span><span class="p">):</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="n">Hello</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        welcome page</span>
@@ -796,30 +797,31 @@
 <p class="admonition-title">Notice</p>
 <p>此功能到目前为止，除生成OpenAPI文档的作用外，无其他作用。<strong>未来或许会增加 mock 功能。</strong></p>
 </div>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.view</span> <span class="kn">import</span> <span class="n">View</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
 <span class="kn">from</span> <span class="nn">indexpy.test</span> <span class="kn">import</span> <span class="n">TestView</span>
-<span class="kn">from</span> <span class="nn">indexpy.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
-<span class="kn">from</span> <span class="nn">indexpy.openapi</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">describe</span>
+<span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
+<span class="kn">from</span> <span class="nn">indexpy.openapi</span> <span class="kn">import</span> <span class="n">describe</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
 
 
-<span class="k">class</span> <span class="nc">Hello</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Hello</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="s2">&quot;Aber&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;your name&quot;</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">Message</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Message</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;your message&quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;your name&quot;</span><span class="p">)</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;what are you want to say?&quot;</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">MessageResponse</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">MessageResponse</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;message response&quot;&quot;&quot;</span>
 
     <span class="n">message</span><span class="p">:</span> <span class="n">Message</span>
 
 
-<span class="k">class</span> <span class="nc">HTTP</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">HTTP</span><span class="p">(</span><span class="n">HTTPView</span><span class="p">):</span>
     <span class="nd">@describe</span><span class="p">(</span>
         <span class="mi">200</span><span class="p">,</span>
         <span class="sd">&quot;&quot;&quot;</span>

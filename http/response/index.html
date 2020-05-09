@@ -660,11 +660,11 @@
 </ul>
 <h3 id="templateresponse">TemplateResponse</h3>
 <p>Index 提供了使用 Jinja2 的方法。如下代码将会自动在项目下的 <code>templates</code> 目录里寻找对应的模板进行渲染。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.view</span> <span class="kn">import</span> <span class="n">View</span>
-<span class="kn">from</span> <span class="nn">indexpy.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
+<span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
 
 
-<span class="k">class</span> <span class="nc">HTTP</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">HTTP</span><span class="p">(</span><span class="n">HTTPView</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">TemplateResponse</span><span class="p">(</span><span class="s2">&quot;chat.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">})</span>
 </code></pre></div>
@@ -677,7 +677,7 @@
 <p>为了方便使用，Index 允许自定义一些函数来处理 <code>HTTP</code> 内的处理方法返回的非 <code>Response</code> 对象。</p>
 <p>在项目根目录定义文件 <code>responses.py</code>，在其中编写自己的处理函数。</p>
 <p>以下是一个处理 <code>dict</code> 类型的返回值的例子。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.responses</span> <span class="kn">import</span> <span class="n">automatic</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">automatic</span>
 
 
 <span class="nd">@automatic</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
@@ -692,10 +692,10 @@
 
 
 <p>再接着看下面这个类</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.view</span> <span class="kn">import</span> <span class="n">View</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
 
 
-<span class="k">class</span> <span class="nc">HTTP</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">HTTP</span><span class="p">(</span><span class="n">HTTPView</span><span class="p">):</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;some error in server&quot;</span><span class="p">},</span> <span class="mi">500</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;server&quot;</span><span class="p">:</span> <span class="s2">&quot;index.py&quot;</span><span class="p">}</span>
