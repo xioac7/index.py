@@ -13,7 +13,7 @@
       
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.1.7">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.2.2">
     
     
       
@@ -21,7 +21,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.4c7052ca.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.a2408e81.min.css">
       
       
     
@@ -572,10 +572,9 @@
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
 
-<span class="n">app</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span>
+<span class="n">app</span><span class="o">.</span><span class="n">mount_asgi</span><span class="p">(</span>
     <span class="s2">&quot;/openapi&quot;</span><span class="p">,</span>
-    <span class="n">OpenAPI</span><span class="p">(</span><span class="s2">&quot;index.py example&quot;</span><span class="p">,</span> <span class="s2">&quot;just a example, power by index.py&quot;</span><span class="p">,</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;asgi&quot;</span>
+    <span class="n">OpenAPI</span><span class="p">(</span><span class="s2">&quot;index.py example&quot;</span><span class="p">,</span> <span class="s2">&quot;just a example, power by index.py&quot;</span><span class="p">,</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">)</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -597,18 +596,18 @@
 <span class="kn">from</span> <span class="nn">indexpy.test</span> <span class="kn">import</span> <span class="n">TestView</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
 <span class="kn">from</span> <span class="nn">indexpy.openapi</span> <span class="kn">import</span> <span class="n">describe</span>
-<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
 
 
 <span class="k">class</span> <span class="nc">Hello</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="s2">&quot;Aber&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;your name&quot;</span><span class="p">)</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="s2">&quot;Aber&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;your name&quot;</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">Message</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;your message&quot;&quot;&quot;</span>
 
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;your name&quot;</span><span class="p">)</span>
-    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;what are you want to say?&quot;</span><span class="p">)</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;your name&quot;</span><span class="p">)</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;what are you want to say?&quot;</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">MessageResponse</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -656,7 +655,7 @@
 
 <h2 id="tags">Tags</h2>
 <p>OpenAPI 的 Tags 是一个有用的功能，在 Index 里，你可以通过如下方式来指定 URL 的 tags</p>
-<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="o">.</span><span class="n">mount_asgi</span><span class="p">(</span>
     <span class="s2">&quot;/openapi&quot;</span><span class="p">,</span>
     <span class="n">OpenAPI</span><span class="p">(</span>
         <span class="s2">&quot;index.py example&quot;</span><span class="p">,</span>
@@ -670,8 +669,7 @@
             <span class="s2">&quot;about&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;about page&quot;</span><span class="p">,</span> <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;/about/&quot;</span><span class="p">,</span> <span class="s2">&quot;/about/me&quot;</span><span class="p">]},</span>
             <span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;get/upload file api&quot;</span><span class="p">,</span> <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;/file&quot;</span><span class="p">]},</span>
         <span class="p">},</span>
-    <span class="p">),</span>
-    <span class="s2">&quot;asgi&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 </code></pre></div>
                 
@@ -740,7 +738,7 @@
       
     </div>
     
-      <script src="../assets/javascripts/vendor.22b62ea4.min.js"></script>
+      <script src="../assets/javascripts/vendor.d710d30a.min.js"></script>
       <script src="../assets/javascripts/bundle.5f27aba8.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\uff0c\\u3002]+", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c"}</script>
       
       <script>
@@ -748,7 +746,7 @@
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.f6ebf1dc.min.js"
+            worker: "../assets/javascripts/worker/search.27c6a5e6.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
