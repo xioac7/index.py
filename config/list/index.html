@@ -738,11 +738,12 @@
                 
                 <h3 id="env">ENV</h3>
 <p><strong>默认值:</strong> <code>"dev"</code></p>
-<p><code>env</code> 是一个十分重要的配置，它允许自动使用对应环境下的配置。</p>
+<p><code>env</code> 是一个十分重要的配置，它允许<a href="/config/#_3">自动使用对应环境下的配置</a>。</p>
+<p>它将读取环境变量里 <code>INDEX_ENV</code> 的值，可以但不推荐在配置文件中指定。</p>
 <h3 id="debug">DEBUG</h3>
 <p><strong>默认值:</strong> <code>False</code></p>
-<p>我不认为这个配置需要解释什么。</p>
-<p>在环境变量里 <code>INDEX_DEBUG</code> 为 <code>"on"</code> 或者 <code>"True"</code> 时，<code>DEBUG</code> 为真。</p>
+<p>在环境变量里 <code>INDEX_DEBUG</code> 为 <code>"on"</code> 或者 <code>"True"</code> 时，<code>DEBUG</code> 为真；该值同样可以在配置文件中指定。</p>
+<p>当 <code>DEBUG</code> 为真时，将详细的显示 <code>500</code> 错误信息。</p>
 <h3 id="log_level">LOG_LEVEL</h3>
 <p><strong>默认值:</strong> <code>"info"</code></p>
 <p><code>log_level</code> 有五个可用值, 下面是它与 <code>logging</code> 的等级对应表</p>

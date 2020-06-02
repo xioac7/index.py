@@ -332,20 +332,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#templateresponse" class="md-nav__link">
-    TemplateResponse
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#yamlresponse" class="md-nav__link">
-    YAMLResponse
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     自定义返回类型
   </a>
@@ -564,20 +550,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#templateresponse" class="md-nav__link">
-    TemplateResponse
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#yamlresponse" class="md-nav__link">
-    YAMLResponse
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     自定义返回类型
   </a>
@@ -722,11 +694,13 @@
 <li><a href="https://www.starlette.io/responses/#jsonresponse">JSONResponse</a></li>
 <li><a href="https://www.starlette.io/responses/#redirectresponse">RedirectResponse</a></li>
 <li><a href="https://www.starlette.io/responses/#streamingresponse">StreamingResponse</a></li>
-<li><a href="https://www.starlette.io/responses/#fileresponse">FileResponse</a></li>
-<li>TemplateResponse</li>
-<li>YAMLResponse</li>
+<li>
+<p><a href="https://www.starlette.io/responses/#fileresponse">FileResponse</a></p>
+</li>
+<li>
+<p>TemplateResponse</p>
+</li>
 </ul>
-<h3 id="templateresponse">TemplateResponse</h3>
 <p>Index 提供了使用 Jinja2 的方法。如下代码将会自动在项目下的 <code>templates</code> 目录里寻找对应的模板进行渲染。</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
@@ -738,39 +712,13 @@
 </code></pre></div>
 
 
-<h3 id="yamlresponse">YAMLResponse</h3>
+<ul>
+<li>YAMLResponse</li>
+</ul>
 <p>由于 YAML 与 JSON 的等价性，YAMLResponse 与 JSONResponse 的使用方法相同。</p>
 <p>唯一不同的是，一个返回 YAML 格式，一个返回 JSON 格式。</p>
 <h3 id="_3">自定义返回类型</h3>
 <p>为了方便使用，Index 允许自定义一些函数来处理 <code>HTTP</code> 内的处理方法返回的非 <code>Response</code> 对象。它的原理是拦截响应，通过响应值的类型来自动选择处理函数，把非 <code>Response</code> 对象转换为 <code>Response</code> 对象。</p>
-<p>在项目根目录定义文件 <code>responses.py</code>，在其中编写自己的处理函数。</p>
-<p>以下是一个处理 <code>dict</code> 类型的返回值的例子。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">automatic</span>
-
-
-<span class="nd">@automatic</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">_automatic</span><span class="p">(</span>
-    <span class="n">body</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-    <span class="n">status</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
-    <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
-
-    <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p>再接着看下面这个类</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
-
-
-<span class="k">class</span> <span class="nc">HTTP</span><span class="p">(</span><span class="n">HTTPView</span><span class="p">):</span>
-
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;some error in server&quot;</span><span class="p">},</span> <span class="mi">500</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;server&quot;</span><span class="p">:</span> <span class="s2">&quot;index.py&quot;</span><span class="p">}</span>
-</code></pre></div>
-
-
-<p>当一个 HTTP GET 请求被该类处理后，Index 会判断返回值的第一个值的类型，如果不是 <code>Response</code> 或者其子类对象时，则从已经注册过的类型中查找对应的函数进行处理，查找到对应函数后，将所有的返回值作为位置参数（position parameter）传递给函数，而处理函数必须返回一个 <code>Response</code> 或者其子类对象。</p>
 <p>Index 内置了三个处理函数用于处理六种类型：</p>
 <div class="codehilite"><pre><span></span><code><span class="nd">@automatic</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
 <span class="k">def</span> <span class="nf">_none</span><span class="p">(</span><span class="n">ret</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">NoReturn</span><span class="p">:</span>
