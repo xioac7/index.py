@@ -523,9 +523,9 @@
                 
                   <h1>WebSocket</h1>
                 
-                <h2 id="socket">Socket</h2>
-<p>Websocket 的处理程序编写与 HTTP 类似，同样使用文件路径映射到 URI 的设计。</p>
+                <p>Websocket 的处理程序编写与 HTTP 类似，同样使用文件路径映射到 URI 的设计。</p>
 <p>稍有不同的是 Websocket 的处理类，需要从 <code>indexpy.websocket.SocketView</code> 继承而来，类名必须是 <code>Socket</code>。</p>
+<h2 id="socket">Socket</h2>
 <p>它有一个类属性：<code>encoding</code>，此属性有三个可用值——<code>"text"</code>、<code>"bytes"</code>、<code>"json"</code>，将决定接收到的 websocket 数据以何种编码被解析。</p>
 <p>它有三个方法可用于常规使用，分别对应一个 Websocket 连接的不同状态：</p>
 <ol>

@@ -473,7 +473,7 @@
         
           <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
-    自定义返回类型
+    响应的简化写法
   </a>
   
 </li>
@@ -837,7 +837,7 @@
         
           <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
-    自定义返回类型
+    响应的简化写法
   </a>
   
 </li>
@@ -1086,8 +1086,8 @@
 <h3 id="yamlresponse">YAMLResponse</h3>
 <p>由于 YAML 与 JSON 的等价性，YAMLResponse 与 JSONResponse 的使用方法相同。</p>
 <p>唯一不同的是，一个返回 YAML 格式，一个返回 JSON 格式。</p>
-<h3 id="_4">自定义返回类型</h3>
-<p>为了方便使用，Index 允许自定义一些函数来处理 <code>HTTP</code> 内的处理方法返回的非 <code>Response</code> 对象。它的原理是拦截响应，通过响应值的类型来自动选择处理函数，把非 <code>Response</code> 对象转换为 <code>Response</code> 对象。</p>
+<h3 id="_4">响应的简化写法</h3>
+<p>为了方便使用，Index 允许自定义一些函数来处理 <code>HTTP</code> 内返回的非 <code>Response</code> 对象。它的原理是拦截响应，通过响应值的类型来自动选择处理函数，把非 <code>Response</code> 对象转换为 <code>Response</code> 对象。</p>
 <p>Index 内置了三个处理函数用于处理六种类型：</p>
 <div class="codehilite"><pre><span></span><code><span class="nd">@automatic</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
 <span class="k">def</span> <span class="nf">_none</span><span class="p">(</span><span class="n">ret</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">NoReturn</span><span class="p">:</span>
@@ -1113,6 +1113,36 @@
     <span class="n">body</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">],</span> <span class="n">status</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>正是有了这些内置处理函数，下面这段代码将被正确解析为一个 JSON 响应。</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
+
+
+<span class="k">class</span> <span class="nc">HTTP</span><span class="p">(</span><span class="n">HTTPView</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;value&quot;</span><span class="p">}</span>
+</code></pre></div>
+
+
+<p>同样的，你也可以自定义响应值的简化写法以统一项目的响应规范（哪怕有 <code>TypedDict</code>，Python 的 <code>Dict</code> 约束依旧很弱，但 dataclass 则有效得多），例如：</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">asdict</span>
+
+<span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">automatic</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">JSONResponse</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Error</span><span class="p">:</span>
+    <span class="n">code</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+
+<span class="nd">@automatic</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Error</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_error_json</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="n">Error</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">400</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">asdict</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">status</span><span class="p">)</span>
 </code></pre></div>
 
 
