@@ -13,7 +13,7 @@
       
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.3.1">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.3.2">
     
     
       
@@ -1072,7 +1072,7 @@
 <h3 id="streamingresponse"><a href="https://www.starlette.io/responses/#streamingresponse">StreamingResponse</a></h3>
 <h3 id="fileresponse"><a href="https://www.starlette.io/responses/#fileresponse">FileResponse</a></h3>
 <h3 id="templateresponse">TemplateResponse</h3>
-<p>Index 提供了使用 Jinja2 的方法。如下代码将会自动在项目下的 <code>templates</code> 目录里寻找对应的模板进行渲染。</p>
+<p>Index 提供了使用 Jinja2 的方法。如下代码将会自动在项目下寻找对应的模板进行渲染。（寻找路径由 <a href="/config/list/#templates"><code>TEMPLATES</code></a> 配置进行管理）</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
 
@@ -1083,8 +1083,18 @@
 </code></pre></div>
 
 
+<p><code>TemplateResponse</code> 使用的 <code>jinja2.Environment</code> 来自于 <code>Index().jinja_env</code>，通过更改、覆盖等方式，你可以自由的控制 <code>TemplateResponse</code>。</p>
+<p>例子：</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">globals</span><span class="p">[</span><span class="s2">&quot;now&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span>
+</code></pre></div>
+
+
 <h3 id="yamlresponse">YAMLResponse</h3>
-<p>由于 YAML 与 JSON 的等价性，YAMLResponse 与 JSONResponse 的使用方法相同。</p>
+<p>YAMLResponse 与 JSONResponse 的使用方法相同。</p>
 <p>唯一不同的是，一个返回 YAML 格式，一个返回 JSON 格式。</p>
 <h3 id="_4">响应的简化写法</h3>
 <p>为了方便使用，Index 允许自定义一些函数来处理 <code>HTTP</code> 内返回的非 <code>Response</code> 对象。它的原理是拦截响应，通过响应值的类型来自动选择处理函数，把非 <code>Response</code> 对象转换为 <code>Response</code> 对象。</p>
@@ -1314,14 +1324,14 @@
     </div>
     
       <script src="../assets/javascripts/vendor.d710d30a.min.js"></script>
-      <script src="../assets/javascripts/bundle.5532dfb7.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\uff0c\\u3002]+", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c"}</script>
+      <script src="../assets/javascripts/bundle.7f4f3c92.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c"}</script>
       
       <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.7a2ea5ba.min.js"
+            worker: "../assets/javascripts/worker/search.9b3611bd.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
