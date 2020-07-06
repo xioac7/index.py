@@ -975,7 +975,7 @@
 <p>这些函数默认不接受任何参数，但你可以使用 <code>self.request</code> 去获取此次请求的一些信息。</p>
 <div class="admonition notice">
 <p class="admonition-title">Notice</p>
-<p>注意：这些被用于实际处理 HTTP 请求的函数，无论你以何种方式定义，都会在加载时被改造成异步函数，但为了减少不必要的损耗，尽量使用 <code>async def</code> 去定义它们。</p>
+<p>注意：这些被用于实际处理 HTTP 请求的函数，无论你以何种方式定义，都会在加载时被改造成异步函数，但为了减少不必要的损耗，尽量使用 <code>async def</code> 去定义它们——除非在其中使用了含有阻塞 IO 的其他函数，例如 Django ORM, PonyORM 等。</p>
 </div>
 <h2 id="_2">获取请求</h2>
 <p>如上所说，所有 HTTP 类中的方法都可以通过 <code>self.request</code> 来读取此次请求的信息。下面将介绍它最常用的一些属性。</p>
@@ -1172,7 +1172,7 @@
 </ol>
 <div class="admonition notice">
 <p class="admonition-title">Notice</p>
-<p>以上函数无论你以何种方式定义，都会在加载时被改造成异步函数，但为了减少不必要的损耗，尽量使用 <code>async def</code> 去定义它们。</p>
+<p>以上函数无论你以何种方式定义，都会在加载时被改造成异步函数，但为了减少不必要的损耗，尽量使用 <code>async def</code> 去定义它们——除非在其中使用了含有阻塞 IO 的其他函数，例如 Django ORM, PonyORM 等。</p>
 </div>
 <h3 id="_6">子中间件</h3>
 <p>很多时候，对于同一个父 URI，需要有多个中间件去处理。通过指定 <code>Middleware</code> 中的 <code>mounts</code> 属性，可以为中间件指定子中间件。执行时会先执行父中间件，再执行子中间件。</p>
