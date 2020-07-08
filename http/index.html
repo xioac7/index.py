@@ -478,13 +478,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    默认响应
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     中间件
   </a>
   
@@ -492,7 +499,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     子中间件
   </a>
   
@@ -504,14 +511,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    自定义状态处理
+  <a href="#_8" class="md-nav__link">
+    自定义异常处理
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     后台任务
   </a>
   
@@ -800,13 +807,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    默认响应
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     中间件
   </a>
   
@@ -814,7 +828,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     子中间件
   </a>
   
@@ -826,14 +840,14 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    自定义状态处理
+  <a href="#_8" class="md-nav__link">
+    自定义异常处理
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     后台任务
   </a>
   
@@ -933,7 +947,7 @@
 <p>这些函数默认不接受任何参数，但你可以使用 <code>self.request</code> 去获取此次请求的一些信息。</p>
 <div class="admonition notice">
 <p class="admonition-title">Notice</p>
-<p>注意：这些被用于实际处理 HTTP 请求的函数，无论你以何种方式定义，都会在加载时被改造成异步函数，但为了减少不必要的损耗，尽量使用 <code>async def</code> 去定义它们——除非在其中使用了含有阻塞 IO 的其他函数，例如 Django ORM, PonyORM 等。</p>
+<p>这些被用于实际处理 HTTP 请求的函数，无论你以何种方式定义，都会在加载时被改造成异步函数，但为了减少不必要的损耗，尽量使用 <code>async def</code> 去定义它们——除非在其中使用了含有阻塞 IO 的其他函数，例如 Django ORM, PonyORM 等。</p>
 </div>
 <h2 id="_2">获取请求</h2>
 <p>如上所说，所有 HTTP 类中的方法都可以通过 <code>self.request</code> 来读取此次请求的信息。下面将介绍它最常用的一些属性。</p>
@@ -1114,11 +1128,19 @@
 </code></pre></div>
 
 
-<h2 id="_5">中间件</h2>
+<h3 id="_5">默认响应</h3>
+<p>当你需要返回一个 HTTP 状态码以及其默认的描述时，可以使用</p>
+<div class="codehilite"><pre><span></span><code><span class="k">raise</span> <span class="n">indexpy</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">HTTPException</span><span class="p">(</span><span class="n">CODE</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>其好处在于你可以通过<a href="#_8">自定义异常处理</a>来捕捉并自定义它们。</p>
+<p>例如：网站需要有统一的 404 页面。</p>
+<h2 id="_6">中间件</h2>
 <p>在 <code>views</code> 中任意 <code>__init__.py</code> 中定义名为 <code>Middleware</code> 的类, 它将能处理所有通过该路径的 HTTP 请求。</p>
 <p>譬如在 <code>views/__init__.py</code> 中定义的中间件，能处理所有 URI 的 HTTP 请求；在 <code>views/api/__init__.py</code> 则只能处理 URI 为 <code>/api/###</code> 的请求。</p>
-<p><code>Middleware</code> 需要继承 <code>indexpy.http.MiddlewareMixin</code>，有以下两个方法可以重写。</p>
-<ol>
+<p><code>Middleware</code> 需要继承 <code>indexpy.http.MiddlewareMixin</code>，有以下三个方法可以重写。</p>
+<ul>
 <li>
 <p><code>process_request(request)</code></p>
 <p>此方法在请求被层层传递时调用，可用于修改 <code>request</code> 对象以供后续处理使用。必须返回 <code>None</code>，否则返回值将作为最终结果并直接终止此次请求。</p>
@@ -1127,12 +1149,16 @@
 <p><code>process_response(request, response)</code></p>
 <p>此方法在请求被正常处理、已经返回响应对象后调用，它必须返回一个可用的响应对象（一般来说直接返回 <code>response</code> 即可）。</p>
 </li>
-</ol>
+<li>
+<p><code>process_exception(request, exception)</code></p>
+<p>此方法在中间件之后的调用链路上出现异常时被调用。当其返回值为 <code>None</code> 时，异常会被原样抛出，否则其返回值将作为此次请求的响应值被返回。</p>
+</li>
+</ul>
 <div class="admonition notice">
 <p class="admonition-title">Notice</p>
 <p>以上函数无论你以何种方式定义，都会在加载时被改造成异步函数，但为了减少不必要的损耗，尽量使用 <code>async def</code> 去定义它们——除非在其中使用了含有阻塞 IO 的其他函数，例如 Django ORM, PonyORM 等。</p>
 </div>
-<h3 id="_6">子中间件</h3>
+<h3 id="_7">子中间件</h3>
 <p>很多时候，对于同一个父 URI，需要有多个中间件去处理。通过指定 <code>Middleware</code> 中的 <code>mounts</code> 属性，可以为中间件指定子中间件。执行时会先执行父中间件，再执行子中间件。</p>
 <div class="admonition notice">
 <p class="admonition-title">Notice</p>
@@ -1162,8 +1188,8 @@
 </code></pre></div>
 
 
-<h2 id="_7">自定义状态处理</h2>
-<p>对于一些故意抛出的异常或者特定的 HTTP 状态码，Index 提供了方法进行统一处理。</p>
+<h2 id="_8">自定义异常处理</h2>
+<p>对于一些故意抛出的异常，Index 提供了方法进行统一处理。</p>
 <p>以下为样例：</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.types</span> <span class="kn">import</span> <span class="n">Request</span><span class="p">,</span> <span class="n">Response</span>
@@ -1186,9 +1212,13 @@
 
 <div class="admonition notice">
 <p class="admonition-title">Notice</p>
-<p>如果是捕捉 HTTP 状态码，则处理函数的 <code>exc</code> 类型是 <code>indexpy.http.HTTPException</code>。否则，捕捉什么异常，则 <code>exc</code> 就是什么类型的异常。</p>
+<p>如果是捕捉 HTTP 状态码，则会捕捉 <code>indexpy.http.HTTPException</code>。</p>
 </div>
-<h2 id="_8">后台任务</h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>在此可以捕捉包括挂载到 Index 中的其他 app 的异常。而中间件中仅能处理通过中间件的异常。</p>
+</div>
+<h2 id="_9">后台任务</h2>
 <h3 id="after-response">After Response</h3>
 <p>Index 提供了简单可用的后台任务的使用方法。</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
