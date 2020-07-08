@@ -1168,7 +1168,7 @@
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
 <span class="kn">from</span> <span class="nn">indexpy.types</span> <span class="kn">import</span> <span class="n">Request</span><span class="p">,</span> <span class="n">Response</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span>
-<span class="kn">from</span> <span class="nn">starlette.exceptions</span> <span class="kn">import</span> <span class="n">HTTPException</span>
+<span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPException</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
 
@@ -1186,11 +1186,11 @@
 
 <div class="admonition notice">
 <p class="admonition-title">Notice</p>
-<p>如果是捕捉 HTTP 状态码，则处理函数的 <code>exc</code> 类型是 <code>starlette.exceptions.HTTPException</code>。否则，捕捉什么异常，则 <code>exc</code> 就是什么类型的异常。</p>
+<p>如果是捕捉 HTTP 状态码，则处理函数的 <code>exc</code> 类型是 <code>indexpy.http.HTTPException</code>。否则，捕捉什么异常，则 <code>exc</code> 就是什么类型的异常。</p>
 </div>
 <h2 id="_8">后台任务</h2>
 <h3 id="after-response">After Response</h3>
-<p>参考 starlette 的 <code>background</code> 设计，Index 提供了更简单可用的使用方法。</p>
+<p>Index 提供了简单可用的后台任务的使用方法。</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
 <span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">after_response</span>
 
