@@ -418,6 +418,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    样例
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -489,6 +496,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    样例
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -544,22 +558,27 @@
 <p>第一行将被当作概要描述，所以尽量简明扼要，不要太长。</p>
 <p>空一行之后，后续的文字都会被当作详细介绍，被安置在 OpenAPI 文档中。</p>
 <h3 id="_2">请求</h3>
-<p>当你使用 <code>pydantic.BaseModel</code> 去解析请求时，请求文档将被自动生成。</p>
+<p>对于所有可处理 HTTP 请求的方法，均可以接受四种参数：<code>body</code>、<code>query</code>、<code>header</code>、<code>cookie</code>。</p>
+<div class="admonition notice">
+<p class="admonition-title">Notice</p>
+<p>由于 index.py 路由设计为文件映射，故而路径参数 <code>path</code> 无法使用。</p>
+</div>
+<p>使用继承自 <code>pydantic.BaseModel</code> 的类作为类型注解即可做到自动参数校验以及生成请求格式文档。</p>
 <h3 id="_3">响应</h3>
 <p>为了描述不同状态码的响应结果，Index 使用装饰器描述，而不是类型注解。既可以使用 models 描述响应(仅支持 application/json)，亦可以直接传递 OpenAPI 文档字符串（当你不想返回一个 application/json 类型的响应时）。</p>
 <div class="admonition notice">
 <p class="admonition-title">Notice</p>
 <p>此功能到目前为止，除生成OpenAPI文档的作用外，无其他作用。<strong>未来或许会增加 mock 功能。</strong></p>
 </div>
+<h3 id="_4">样例</h3>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
-<span class="kn">from</span> <span class="nn">indexpy.test</span> <span class="kn">import</span> <span class="n">TestView</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
 <span class="kn">from</span> <span class="nn">indexpy.openapi</span> <span class="kn">import</span> <span class="n">describe</span>
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
 
 
 <span class="k">class</span> <span class="nc">Hello</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="s2">&quot;Aber&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;your name&quot;</span><span class="p">)</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Aber&quot;</span>
 
 
 <span class="k">class</span> <span class="nc">Message</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -579,26 +598,16 @@
     <span class="nd">@describe</span><span class="p">(</span>
         <span class="mi">200</span><span class="p">,</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        image/png:</span>
+<span class="sd">        text/html:</span>
 <span class="sd">            schema:</span>
 <span class="sd">                type: string</span>
-<span class="sd">                format: binary</span>
-<span class="sd">        &quot;&quot;&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="nd">@describe</span><span class="p">(</span>
-        <span class="mi">403</span><span class="p">,</span>
-        <span class="sd">&quot;&quot;&quot;text/plain:</span>
-<span class="sd">            schema:</span>
-<span class="sd">                type: string</span>
-<span class="sd">            example:</span>
-<span class="sd">                pong</span>
 <span class="sd">        &quot;&quot;&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="n">Hello</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        welcome page</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="o">...</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;welcome, </span><span class="si">{</span><span class="n">query</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span>
 
     <span class="nd">@describe</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">MessageResponse</span><span class="p">)</span>
     <span class="nd">@describe</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
