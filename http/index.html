@@ -900,7 +900,7 @@
 <p>但较为特殊的是名为 <code>index.py</code> 的文件，它能够处理以 <code>/</code> 作为最后一个字符的 URI。</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>由于 Python 规定，模块名称必须由字母、数字与下划线组成，但这种 URI 不友好，所以 Index 会将 URI 中的 <code>_</code> 全部替换成 <code>-</code> 并做 301 跳转，你可以通过设置 <a href="/config/list/#allow_underline">ALLOW_UNDERLINE</a> 为真去关闭此功能。</p>
+<p>由于 Python 规定，模块名称必须由字母、数字与下划线组成，但这种 URI 不友好，所以 Index 会将 URI 中的 <code>_</code> 全部替换成 <code>-</code> 并做 301 跳转，你可以通过设置 <code>Index(allow_underline=True)</code> 去关闭此功能。</p>
 </div>
 <table>
 <thead>
@@ -1044,7 +1044,7 @@
 <h3 id="streamingresponse"><a href="https://www.starlette.io/responses/#streamingresponse">StreamingResponse</a></h3>
 <h3 id="fileresponse"><a href="https://www.starlette.io/responses/#fileresponse">FileResponse</a></h3>
 <h3 id="templateresponse">TemplateResponse</h3>
-<p>Index 提供了使用 Jinja2 的方法。如下代码将会自动在项目下寻找对应的模板进行渲染。（寻找路径由 <a href="/config/list/#templates"><code>TEMPLATES</code></a> 配置进行管理）</p>
+<p>Index 提供了使用 Jinja2 的方法。如下代码将会自动在项目下寻找对应的模板进行渲染。（寻找路径由 Index 的 <code>templates</code> 参数进行配置）</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
 <span class="kn">from</span> <span class="nn">indexpy.http.responses</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
 
