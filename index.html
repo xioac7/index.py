@@ -430,13 +430,12 @@
 <li>可视化 API 接口 (基于 ReDoc, 针对中文字体优化)</li>
 <li>现代化的测试组件 (基于 pytest 与 requests)</li>
 <li>非常简单的部署 (基于 uvicorn 与 gunicorn)</li>
-<li>支持真正的热重载 (默认关闭)</li>
 <li>挂载 ASGI/WSGI 应用 (基于 <a href="https://github.com/abersheeran/a2wsgi/">a2wsgi</a>)</li>
 <li>更好用的 background tasks (基于 starlette)</li>
 <li>可使用任何可用的 ASGI 生态</li>
 </ul>
 <p>单纯看性能，Index.py 不逊色于 Starlette/FastAPI，从理论上 Index.py 更快一点，这是由于前者的路由系统需要搜索到最合适的路由进行处理，而 Index.py 基于文件系统直接映射。网站越大，路由越多，Index.py 优势越明显。</p>
-<p>Index.py 将始终坚持文件映射路由——如果你喜欢基于装饰器的路由注册（例如 flask），那么请使用 <a href="https://fastapi.tiangolo.com/">FastAPI</a>，它与 Index.py 都实现了 OpenAPI 文档生成功能、后台任务等功能；如果你喜欢 Django 式的路由注册，可以直接使用 <a href="https://starlette.io">Starlette</a>，FastAPI 与 Index.py 都是基于 Starlette 的二次开发框架。</p>
+<p>Index.py 将始终坚持文件映射路由——如果你喜欢基于装饰器的路由注册（例如 flask），那么请使用 <a href="https://fastapi.tiangolo.com/">FastAPI</a>，它与 Index.py 都实现了 OpenAPI 文档生成功能、后台任务等功能；如果你喜欢 Django 式的路由注册，可以直接使用 <a href="https://www.starlette.io">Starlette</a>，FastAPI 与 Index.py 都是基于 Starlette 的二次开发框架。</p>
 <p>如果你对本框架后续发展有任何的想法，欢迎访问 <a href="https://github.com/abersheeran/index.py">Github</a> 提 issue。</p>
                 
               
