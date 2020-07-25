@@ -387,7 +387,34 @@
         
           <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
+    基于函数的中间件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
     基于类的中间件
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#websocket" class="md-nav__link">
+    WebSocket 中间件
+  </a>
+  
+    <nav class="md-nav" aria-label="WebSocket 中间件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    基于函数的中间件
   </a>
   
 </li>
@@ -515,7 +542,34 @@
         
           <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
+    基于函数的中间件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
     基于类的中间件
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#websocket" class="md-nav__link">
+    WebSocket 中间件
+  </a>
+  
+    <nav class="md-nav" aria-label="WebSocket 中间件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    基于函数的中间件
   </a>
   
 </li>
@@ -548,7 +602,20 @@
                   <h1>Middleware</h1>
                 
                 <h2 id="http">HTTP 中间件</h2>
-<h3 id="_1">基于类的中间件</h3>
+<h3 id="_1">基于函数的中间件</h3>
+<p>编写一个 HTTP 中间件十分简单，就像编写一个装饰器函数一样。</p>
+<p>第一层函数只有一个参数，就是被包裹的可调用对象。第二层函数仅接受一个参数 <code>requesst</code>，函数返回值将作为此次请求的响应结果。</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">middleware</span><span class="p">(</span><span class="n">endpoint</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+        <span class="o">...</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">endpoint</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="o">...</span>
+        <span class="k">return</span> <span class="n">response</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+</code></pre></div>
+
+
+<h3 id="_2">基于类的中间件</h3>
 <p>基于类的中间件可以继承 <code>indexpy.http.MiddlewareMixin</code>，有以下三个方法可以重写。</p>
 <ul>
 <li>
@@ -594,6 +661,18 @@
     <span class="k">async</span> <span class="k">def</span> <span class="nf">process_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;example base middleware response&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">response</span>
+</code></pre></div>
+
+
+<h2 id="websocket">WebSocket 中间件</h2>
+<h3 id="_3">基于函数的中间件</h3>
+<p>编写一个 WebSocket 中间件与编写一个 HTTP 中间件很相似，不同的是 <code>websocket</code> 对应的 <code>endpoint</code> 对象不会有返回值。中间件的第二层函数也不需要返回结果，任何返回结果都是无效的。</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">middleware</span><span class="p">(</span><span class="n">endpoint</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+        <span class="o">...</span>
+        <span class="k">await</span> <span class="n">endpoint</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="o">...</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
 </code></pre></div>
                 
               
