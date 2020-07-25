@@ -51,7 +51,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#http" class="md-skip">
           跳转至
         </a>
       
@@ -342,7 +342,34 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#http" class="md-nav__link">
+    HTTP 处理器
+  </a>
+  
+    <nav class="md-nav" aria-label="HTTP 处理器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
+    函数处理器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    类处理器
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     获取请求值
   </a>
   
@@ -418,7 +445,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     返回响应值
   </a>
   
@@ -489,14 +516,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     响应的简化写法
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     默认响应
   </a>
   
@@ -508,7 +535,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     自定义异常处理
   </a>
   
@@ -659,7 +686,34 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#http" class="md-nav__link">
+    HTTP 处理器
+  </a>
+  
+    <nav class="md-nav" aria-label="HTTP 处理器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
+    函数处理器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    类处理器
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     获取请求值
   </a>
   
@@ -735,7 +789,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     返回响应值
   </a>
   
@@ -806,14 +860,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     响应的简化写法
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     默认响应
   </a>
   
@@ -825,7 +879,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     自定义异常处理
   </a>
   
@@ -853,7 +907,67 @@
                 
                   <h1>HTTP</h1>
                 
-                <h2 id="_1">获取请求值</h2>
+                <h2 id="http">HTTP 处理器</h2>
+<p>在下文中，用于处理 HTTP 请求的可调用对象被称为 HTTP 处理器。</p>
+<h3 id="_1">函数处理器</h3>
+<p>使用函数处理单一类型的请求是很简单的，它会接受一个位置参数 <code>request</code>，默认类型为 <code>indexpy.http.request.Request</code>。</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;/hello&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;get&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;hello&quot;</span>
+</code></pre></div>
+
+
+<p>如果注册路由时使用了路径参数，则需要增加一个名为 <code>path</code> 的关键词参数，它将接受 <code>dict</code> 类型的对象，可以从中读取全部的路径参数。</p>
+<p>如果同时需要将一个 HTTP 处理器注册到多个路由中，并且存在有路由包含路径参数、有路由不包含路径参数，则需要为 <code>path</code> 参数增加默认值 <code>None</code>。</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;/hello&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;get&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;/hello/</span><span class="si">{name}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;get&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;hello&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;hello </span><span class="si">{</span><span class="n">path</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+
+<h3 id="_2">类处理器</h3>
+<p>使用类处理多种请求十分简单。只需要继承 <code>indexpy.http.HTTPView</code> 并编写对应的方法，支持的方法有 <code>"get"</code>，<code>"post"</code>，<code>"put"</code>，<code>"patch"</code>，<code>"delete"</code>，<code>"head"</code>，<code>"options"</code>，<code>"trace"</code>。</p>
+<p>通过 <code>self.request</code> 可以读取此次请求的信息。并且与函数处理器相同，如果需要读取路径参数，应分别在各个函数里增加名为 <code>path</code> 的关键词参数。</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>
+<span class="kn">from</span> <span class="nn">indexpy.http</span> <span class="kn">import</span> <span class="n">HTTPView</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Index</span><span class="p">()</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">http</span><span class="p">(</span><span class="s2">&quot;/cat&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Cat</span><span class="p">(</span><span class="n">HTTPView</span><span class="p">):</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">patch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span>
+</code></pre></div>
+
+
+<h2 id="_3">获取请求值</h2>
 <p>以下是 <code>indexpy.http.request.Request</code> 对象的常用属性与方法。</p>
 <h3 id="method">Method</h3>
 <p>通过 <code>request.method</code> 可以获取到请求方法，例如 <code>get</code>/<code>post</code> 等。</p>
@@ -894,10 +1008,10 @@
 </li>
 </ul>
 <p>你也可以使用 <code>async for</code> 语法将 <code>body</code> 作为一个 <code>bytes</code> 流进行读取：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="o">...</span>
     <span class="n">body</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
-    <span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">stream</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">stream</span><span class="p">():</span>
         <span class="n">body</span> <span class="o">+=</span> <span class="n">chunk</span>
     <span class="o">...</span>
 </code></pre></div>
@@ -937,7 +1051,7 @@
 </code></pre></div>
 
 
-<h2 id="_2">返回响应值</h2>
+<h2 id="_4">返回响应值</h2>
 <p>对于任何正常处理的 HTTP 请求都必须返回一个 <code>indexpy.http.responses.Response</code> 对象或者是它的子类对象。</p>
 <p>在 <code>index.http.repsonses</code> 里内置的可用对象如下：</p>
 <h3 id="response"><a href="https://www.starlette.io/responses/#response">Response</a></h3>
@@ -972,7 +1086,7 @@
 <h3 id="yamlresponse">YAMLResponse</h3>
 <p>YAMLResponse 与 JSONResponse 的使用方法相同。</p>
 <p>唯一不同的是，一个返回 YAML 格式，一个返回 JSON 格式。</p>
-<h3 id="_3">响应的简化写法</h3>
+<h3 id="_5">响应的简化写法</h3>
 <p>为了方便使用，Index 允许自定义一些函数来处理 <code>HTTP</code> 内返回的非 <code>Response</code> 对象。它的原理是拦截响应，通过响应值的类型来自动选择处理函数，把非 <code>Response</code> 对象转换为 <code>Response</code> 对象。</p>
 <p>Index 内置了三个处理函数用于处理六种类型：</p>
 <div class="codehilite"><pre><span></span><code><span class="nd">@automatic</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
@@ -1032,7 +1146,7 @@
 </code></pre></div>
 
 
-<h3 id="_4">默认响应</h3>
+<h3 id="_6">默认响应</h3>
 <p>当你需要返回一个 HTTP 状态码以及其默认的描述时，可以使用</p>
 <div class="codehilite"><pre><span></span><code><span class="k">raise</span> <span class="n">indexpy</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">HTTPException</span><span class="p">(</span><span class="n">CODE</span><span class="p">)</span>
 </code></pre></div>
@@ -1040,7 +1154,7 @@
 
 <p>其好处在于你可以通过<a href="#_8">自定义异常处理</a>来捕捉并自定义它们。</p>
 <p>例如：网站需要有统一的 404 页面。</p>
-<h2 id="_5">自定义异常处理</h2>
+<h2 id="_7">自定义异常处理</h2>
 <p>对于一些故意抛出的异常，Index 提供了方法进行统一处理。</p>
 <p>以下为样例：</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">indexpy</span> <span class="kn">import</span> <span class="n">Index</span>

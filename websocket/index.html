@@ -51,7 +51,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#socket" class="md-skip">
+        <a href="#websocket" class="md-skip">
           跳转至
         </a>
       
@@ -354,22 +354,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#socket" class="md-nav__link">
-    Socket
+  <a href="#websocket" class="md-nav__link">
+    WebSocket 处理器
   </a>
   
-    <nav class="md-nav" aria-label="Socket">
+    <nav class="md-nav" aria-label="WebSocket 处理器">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#websocket" class="md-nav__link">
-    WebSocket 对象
+  <a href="#_1" class="md-nav__link">
+    函数处理器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    类处理器
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#websocket_1" class="md-nav__link">
+    WebSocket 对象
+  </a>
   
 </li>
       
@@ -506,22 +520,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#socket" class="md-nav__link">
-    Socket
+  <a href="#websocket" class="md-nav__link">
+    WebSocket 处理器
   </a>
   
-    <nav class="md-nav" aria-label="Socket">
+    <nav class="md-nav" aria-label="WebSocket 处理器">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#websocket" class="md-nav__link">
-    WebSocket 对象
+  <a href="#_1" class="md-nav__link">
+    函数处理器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    类处理器
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#websocket_1" class="md-nav__link">
+    WebSocket 对象
+  </a>
   
 </li>
       
@@ -547,31 +575,47 @@
                 
                   <h1>WebSocket</h1>
                 
-                <p>Websocket 的处理程序编写与 HTTP 类似，同样使用文件路径映射到 URI 的设计。</p>
-<p>稍有不同的是 Websocket 的处理类，需要从 <code>indexpy.websocket.SocketView</code> 继承而来，类名必须是 <code>Socket</code>。</p>
-<h2 id="socket">Socket</h2>
-<p>它有一个类属性：<code>encoding</code>，此属性有三个可用值——<code>"text"</code>、<code>"bytes"</code>、<code>"json"</code>，将决定接收到的 websocket 数据以何种编码被解析。</p>
-<p>它有三个方法可用于常规使用，分别对应一个 Websocket 连接的不同状态：</p>
+                <h2 id="websocket">WebSocket 处理器</h2>
+<p>在下文中，用于处理 WebSocket 请求的可调用对象被称为 WebSocket 处理器。</p>
+<h3 id="_1">函数处理器</h3>
+<p>函数接受一个位置参数 <code>websocket</code>，它是一个 <code>indexpy.websocket.request.WebSocket</code> 对象。在函数的开始，必须调用 <code>await websocket.accept()</code>，在函数结束必须调用 <code>await websocket.close(CLOSE_CODE)</code>。</p>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">simple_echo</span><span class="p">(</span><span class="n">websocket</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">receive_json</span><span class="p">()</span>
+            <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send_json</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h3 id="_2">类处理器</h3>
+<p>与 HTTP 类处理器类似，WebSocket 类处理器需要从 <code>indexpy.websocket.SocketView</code> 继承而来。</p>
+<p>它有一个类属性：<code>encoding</code>，此属性有三个可用值——<code>"text"</code>、<code>"bytes"</code>、<code>"json"</code>，将决定接收到的 WebSocket 数据以何种编码被解析。默认为 <code>json</code>。</p>
+<p>它有三个方法可用于常规使用，分别对应一个 WebSocket 连接的不同状态：</p>
 <ol>
 <li>
 <p><code>on_connect()</code></p>
-<p>这个函数在一个 websocket 连接被建立后调用，你必须在其中显式的调用 <code>await self.websocket.accept()</code> 来接受 websocket 连接的建立。</p>
+<p>此函数在一个 websocket 连接被建立后调用。</p>
+<p>如果覆盖了此函数，则必须在其中显式的调用 <code>await self.websocket.accept()</code> 来接受连接的建立。</p>
 </li>
 <li>
 <p><code>on_receive(data: typing.Any)</code></p>
-<p>这个函数在接受一条完整的数据时被调用（你不需要考虑数据帧），<code>data</code> 的类型由类属性 <code>encoding</code> 控制。</p>
+<p>此函数在接受一条完整的数据时被调用，<code>data</code> 的类型由类属性 <code>encoding</code> 控制。</p>
 </li>
 <li>
 <p><code>on_disconnect(close_code: int)</code></p>
-<p>这个函数在一个 websocket 即将被关闭时调用，你必须在其中显式的调用 <code>await self.websocket.close(code=close_code)</code> 用以关闭 websocket 连接。</p>
+<p>此函数在一个 websocket 即将被关闭时调用。</p>
+<p>如果覆盖了此函数，你必须在其中显式的调用 <code>await self.websocket.close(code=close_code)</code> 用以关闭连接。</p>
 </li>
 </ol>
 <div class="admonition notice">
 <p class="admonition-title">Notice</p>
 <p>这三个函数必须都以 <code>async def</code> 的方式被定义为异步函数</p>
 </div>
-<h3 id="websocket">WebSocket 对象</h3>
-<p>每个 websocket 连接都会对应一个 <code>WebSocket</code> 对象，它拥有一对 <code>receive</code>/<code>send</code> 函数。但为了方便使用，在此基础上封装了三对 recv/send 函数。</p>
+<h2 id="websocket_1">WebSocket 对象</h2>
+<p>每个 WebSocket 连接都会对应一个 <code>indexpy.websocket.request.WebSocket</code> 对象，它拥有一对 <code>receive</code>/<code>send</code> 函数。但为了方便使用，在此基础上封装了三对 recv/send 函数。</p>
 <ul>
 <li>
 <p><code>receive_byte</code>/<code>send_byte</code>: 接收/发送 <code>bytes</code> 类型的数据</p>
