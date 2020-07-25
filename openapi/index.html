@@ -624,11 +624,7 @@
 <p>第一行将被当作概要描述，所以尽量简明扼要，不要太长。</p>
 <p>空一行之后，后续的文字都会被当作详细介绍，被安置在 OpenAPI 文档中。</p>
 <h3 id="_2">请求</h3>
-<p>对于所有可处理 HTTP 请求的方法，均可以接受四种参数：<code>body</code>、<code>query</code>、<code>header</code>、<code>cookie</code>。</p>
-<div class="admonition notice">
-<p class="admonition-title">Notice</p>
-<p>由于 index.py 路由设计为文件映射，故而路径参数 <code>path</code> 无法使用。</p>
-</div>
+<p>对于所有可处理 HTTP 请求的方法，均可以接受五种参数：<code>path</code>、<code>body</code>、<code>query</code>、<code>header</code>、<code>cookie</code>。</p>
 <p>使用继承自 <code>pydantic.BaseModel</code> 的类作为类型注解即可做到自动参数校验以及生成请求格式文档。</p>
 <h3 id="_3">响应</h3>
 <p>为了描述不同状态码的响应结果，Index 使用装饰器描述，而不是类型注解。既可以使用 models 描述响应(仅支持 application/json)，亦可以直接传递 OpenAPI 文档字符串（当你不想返回一个 application/json 类型的响应时）。</p>
